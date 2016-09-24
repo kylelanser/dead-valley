@@ -6,11 +6,11 @@ require(['../lib/TileMarshal', '../lib/SpriteMarshal', '../lib/sprite-info'],
     this.spriteInfo = spriteInfo;
   };
   Sprite.prototype.saveMetadata = function () {
-    var pos = this.spriteTile.position();
+    var position = this.spriteTile.position();
     return {
       clazz: this.name.replace(/\d+$/, ''), // numbers at the end denote types
       type:  this.name,
-      pos:   this.pos
+      position:   this.position
     };
   };
 
@@ -296,9 +296,9 @@ require(['../lib/TileMarshal', '../lib/SpriteMarshal', '../lib/sprite-info'],
       if (data.sprites) {
         _(data.sprites).each(function (spriteString) {
           var spriteData = JSON.parse(spriteString);
-          var x          = parseInt(spriteData.pos.x);
-          var y          = parseInt(spriteData.pos.y);
-          var rot        = parseInt(spriteData.pos.rot);
+          var x          = parseInt(spriteData.position.x);
+          var y          = parseInt(spriteData.position.y);
+          var rot        = parseInt(spriteData.position.rot);
           var type       = spriteData.type || spriteData.clazz;
           var info       = SPRITES[type];
           var sprite     = generateSpriteTile('div', type).css({
@@ -416,10 +416,10 @@ require(['../lib/TileMarshal', '../lib/SpriteMarshal', '../lib/sprite-info'],
   var moveSelectedSprite = function (x, y) {
     var sprite = $map.children('.sprite.selected');
     if (sprite.length) {
-      var pos = sprite.position();
+      var position = sprite.position();
       sprite.css({
-        left: pos.left + x,
-        top: pos.top + y
+        left: position.left + x,
+        top: position.top + y
       });
     }
   };
@@ -620,10 +620,10 @@ require(['../lib/TileMarshal', '../lib/SpriteMarshal', '../lib/sprite-info'],
 
   var createArchetypeHoverElement = function () {
     var archetype = newArchetype[newArchetypeIndex];
-    var pos = null;
+    var position = null;
 
     if ($newArchetypeDisplay) {
-      pos = $newArchetypeDisplay.position();
+      position = $newArchetypeDisplay.position();
       $newArchetypeDisplay.remove();
     }
 
@@ -633,8 +633,8 @@ require(['../lib/TileMarshal', '../lib/SpriteMarshal', '../lib/sprite-info'],
       "height": archetype.height * TILE_SIZE
     });
 
-    if (pos) {
-      $newArchetypeDisplay.css({"left": pos.left, "top": pos.top});
+    if (position) {
+      $newArchetypeDisplay.css({"left": position.left, "top": position.top});
     }
 
     var startRow    = Math.floor(archetype.startTile / MAP_SIZE);
@@ -749,15 +749,15 @@ require(['../lib/TileMarshal', '../lib/SpriteMarshal', '../lib/sprite-info'],
     },
 
     spriteObject: function () {
-      Sprite.prototype.__defineGetter__('pos', function () {
+      Sprite.prototype.__defineGetter__('position', function () {
         var rot = this.spriteTile.data('rotate');
         setSpriteRotation(this.spriteTile, 0); // unrotate so we get the correct position
-        var pos = this.spriteTile.position();
+        var position = this.spriteTile.position();
         setSpriteRotation(this.spriteTile, rot);
         var center = this.spriteInfo.center;
         return {
-          x: pos.left + center.x,
-          y: pos.top + center.y,
+          x: position.left + center.x,
+          y: position.top + center.y,
           rot: rot || 0
         };
       });
@@ -817,7 +817,7 @@ require(['../lib/TileMarshal', '../lib/SpriteMarshal', '../lib/sprite-info'],
         clearCurrentMapOffset();
       });
 
-      $('.building-name').live('click', function (e) {
+      $('.building-name').on('click', function (e) {
         var buildingName = $(this);
         if (buildingName.is('.selected')) {
           buildingName.removeClass('selected');

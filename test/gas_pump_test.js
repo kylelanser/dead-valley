@@ -24,8 +24,8 @@ require(['Introduction', 'models/GasPump', 'models/Honda', 'inventory/GasCan', '
 
     runs(function () {
       car = new Honda();
-      car.pos.x = x;
-      car.pos.y = y;
+      car.position.x = x;
+      car.position.y = y;
       Game.addSprite(car);
     });
 
@@ -52,8 +52,8 @@ require(['Introduction', 'models/GasPump', 'models/Honda', 'inventory/GasCan', '
       $('#resume').click();
 
       runs(function () {
-        Game.dude.pos.x = x - 20;
-        Game.dude.pos.y = y;
+        Game.dude.position.x = x - 20;
+        Game.dude.position.y = y;
 
         clearSprites();
       });
@@ -67,8 +67,8 @@ require(['Introduction', 'models/GasPump', 'models/Honda', 'inventory/GasCan', '
 
       runs(function () {
         pump = new GasPump();
-        pump.pos.x = x;
-        pump.pos.y = y;
+        pump.position.x = x;
+        pump.position.y = y;
         Game.addSprite(pump);
       });
 

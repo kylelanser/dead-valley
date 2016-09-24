@@ -20,11 +20,11 @@ require(['models/Honda', 'inventory/GasCan'], function (Honda, GasCan) {
       var y = Game.map.originOffsetY + 300;
 
       car = new Honda();
-      car.pos.x = x;
-      car.pos.y = y;
+      car.position.x = x;
+      car.position.y = y;
       Game.addSprite(car);
 
-      Game.dude.pos.x = car.pos.x - 15;
+      Game.dude.position.x = car.position.x - 15;
     });
 
     afterEach(function () {

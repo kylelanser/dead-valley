@@ -133,6 +133,11 @@ add eating sound
 add ability to sleep in houses if no zomibes are chasing you
 make gas can glow
 repair sound
+add HUD speedometer
+add HUD car damage meter
+add dude-energy level (-walking, -running, +eating, +sleep)
+add dude-exhaustion (+sleeping)
+make car drive more naturally
 
 *BUGS*
 X fix cursor rendering when left click on fuelee inventory item
